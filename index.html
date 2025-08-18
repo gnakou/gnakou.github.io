@@ -2,20 +2,20 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>永城一高2023级高三分班查询系统</title>
 <style>
-body{margin:0;font-family:"Microsoft YaHei",sans-serif;background:#f2f2f2}
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft YaHei",sans-serif}
+body{background:#f2f2f2}
 .sub_top{height:44px;line-height:44px;background:#0066cc;color:#fff;display:flex;padding:0 10px}
-.title{flex:1;font-size:18px;font-weight:bold}
+.title{flex:1;font-weight:bold;font-size:18px}
 .back a{color:#fff;text-decoration:none}
 .main{background:#fff;margin:10px;padding:10px;border-radius:6px}
-.so_box{margin-bottom:12px}
-.txts{width:100%;padding:8px 6px;font-size:16px;border:1px solid #ccc;border-radius:4px;box-sizing:border-box}
+.txts{width:100%;padding:8px 6px;font-size:16px;border:1px solid #ccc;border-radius:4px;margin-bottom:12px}
 .buts{width:100%;padding:10px 0;font-size:16px;background:#0066cc;color:#fff;border:none;border-radius:4px;cursor:pointer}
-.startBtn{background:#28a745;margin-bottom:10px}
-.so_boxex{margin-top:12px;font-size:14px;color:#666;text-align:center}
-.equation{margin:12px 0;text-align:center;font-size:16px;color:#333}
+.startBtn{background:#28a745}
+.so_boxex{font-size:14px;color:#666;text-align:center;margin-top:20px}
+.equation{font-size:16px;text-align:center;margin:12px 0;color:#333}
 </style>
 </head>
 <body>
@@ -25,102 +25,40 @@ body{margin:0;font-family:"Microsoft YaHei",sans-serif;background:#f2f2f2}
 </div>
 
 <div class="main">
-  <form id="queryForm">
-    <div class="so_box">
-      <input id="name" class="txts" type="text" placeholder="请输入姓名" maxlength="20" required>
-    </div>
-
-    <button type="button" id="startBtn" class="buts startBtn">开始解方程</button>
-
-    <div class="equation">
-      <span id="eq"></span><br>
-      <input id="ans" class="txts" type="text" placeholder="请输入方程的解，两解用中文逗号隔开，例如1，2" required>
-    </div>
-
-    <button type="submit" class="buts">立即查询</button>
-  </form>
-
-  <div class="so_boxex" style="margin-top:20px;">
-    免责声明：本系统通过记录解方程所需时间，划定班级类型，班级序号为随机生成。仅供娱乐，查询结果与实际分班无关，请勿当真！
-  </div>
+  <input id="name" class="txts" placeholder="请输入姓名" maxlength="20">
+  <button id="startBtn" class="buts startBtn">开始解方程</button>
+  <div class="equation"><span id="eq"></span></div>
+  <input id="ans" class="txts" placeholder="请输入方程的解，两解用中文逗号隔开，例如1，2">
+  <button class="buts" onclick="query()">立即查询</button>
+  <div class="so_boxex">免责声明：本系统通过记录解方程所需时间，划定班级类型，班级序号为随机生成。仅供娱乐，查询结果与实际分班无关，请勿当真！</div>
 </div>
 
 <script>
-(() => {
-  'use strict';
-  const eqSpan   = document.getElementById('eq');
-  const form     = document.getElementById('queryForm');
-  const startBtn = document.getElementById('startBtn');
-  let answers;
-  let startTime = null;
-
-  const gen = () => {
-    const [x1, x2] = [0, 0].map(() => Math.floor(Math.random() * 11) - 5);
-    const [a, b, c] = [1, -(x1 + x2), x1 * x2];
-    answers = [x1, x2].sort((a, b) => a - b);
-    eqSpan.textContent = `请解方程：${a}x² ${b >= 0 ? '+' : ''}${b}x ${c >= 0 ? '+' : ''}${c} = 0`;
-  };
-
-  startBtn.addEventListener('click', () => {
-    gen();
-    startTime = Date.now();
-    startBtn.disabled = true;
-    startBtn.textContent = '计时中…';
-  });
-
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-
-    if (!startTime) {
-      alert('请先点击“开始解方程”按钮！');
-      return;
-    }
-
-    const name = document.getElementById('name').value.trim();
-    const user = document.getElementById('ans').value.trim()
-                   .split('，').map(v => Number(v.trim())).sort((a, b) => a - b);
-
-    if (answers.length !== user.length || !answers.every((v, i) => v === user[i])) {
-      alert('方程解错了哦，再想想～');
-      return;
-    }
-
-    const elapsed = (Date.now() - startTime) / 1000; // 秒
-    let classNum;
-
-    if (elapsed <= 30) {
-      // 加强班 5-12 或 28-35
-      const pool = [...Array.from({length: 8}, (_, i) => i + 5),
-                    ...Array.from({length: 8}, (_, i) => i + 28)];
-      classNum = pool[Math.floor(Math.random() * pool.length)];
-    } else {
-      // 普通班 13-27 或 36-50
-      const pool = [...Array.from({length: 15}, (_, i) => i + 13),
-                    ...Array.from({length: 15}, (_, i) => i + 36)];
-      classNum = pool[Math.floor(Math.random() * pool.length)];
-    }
-
-    const level = elapsed <= 30 ? '加强班' : '普通班';
-    const w = window.open('', '_blank');
-    w.document.write(`
-      <!DOCTYPE html>
-      <html lang="zh-CN">
-      <head>
-        <meta charset="utf-8">
-        <title>分班结果(仅供娱乐)</title>
-        <style>
-          body{margin:0;font-family:"Microsoft YaHei",sans-serif;background:#f2f2f2;display:flex;justify-content:center;align-items:center;height:100vh}
-          .box{background:#fff;padding:30px 50px;border-radius:8px;text-align:center;font-size:20px}
-        </style>
-      </head>
-      <body>
-        <div class="box">${name}，恭喜你被分入了${classNum}班（${level}）</div>
-      </body>
-      </html>
-    `);
-    w.document.close();
-  });
-})();
+let ans,start;
+const $=id=>document.getElementById(id);
+const gen=()=>{
+  const [x1,x2]=[0,0].map(()=>Math.floor(Math.random()*11)-5);
+  ans=[x1,x2].sort((a,b)=>a-b);
+  $('eq').textContent=`请解方程：x²${-(x1+x2)>=0?'+':''}${-(x1+x2)}x${x1*x2>=0?'+':''}${x1*x2}=0`;
+};
+$('startBtn').onclick=()=>{
+  gen();
+  start=Date.now();
+  $('startBtn').disabled=true;
+  $('startBtn').textContent='计时中…';
+};
+function query(){
+  if(!start) return alert('请先点击“开始解方程”按钮！');
+  const name=$('name').value.trim();
+  const user=$('ans').value.trim().split('，').map(Number).sort((a,b)=>a-b);
+  if(ans.length!==user.length||!ans.every((v,i)=>v===user[i])) return alert('方程解错了哦，再想想～');
+  const t=(Date.now()-start)/1e3;
+  const pool=t<=30?[...Array(8).keys()].map(i=>i+5).concat([...Array(8).keys()].map(i=>i+28))
+                :[...Array(15).keys()].map(i=>i+13).concat([...Array(15).keys()].map(i=>i+36));
+  const cls=pool[Math.floor(Math.random()*pool.length)];
+  document.write(`<!doctype html><title>分班结果(仅供娱乐)</title><style>body{display:flex;justify-content:center;align-items:center;height:100vh;background:#f2f2f2;font-family:sans-serif}.box{background:#fff;padding:30px 50px;border-radius:8px;font-size:20px}</style><div class="box">${name}，恭喜你被分入${cls}班（${t<=30?'加强班':'普通班'}）</div>`);
+  document.close();
+}
 </script>
 </body>
 </html>
