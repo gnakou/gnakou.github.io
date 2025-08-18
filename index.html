@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0">
+<title>一高2023级高三分班查询系统(仅供娱乐)</title>
+<style>
+body{margin:0;font-family:"Microsoft YaHei",sans-serif;background:#f2f2f2}
+.sub_top{height:44px;line-height:44px;background:#0066cc;color:#fff;display:flex;padding:0 10px}
+.title{flex:1;font-size:18px;font-weight:bold}
+.back a{color:#fff;text-decoration:none}
+.main{background:#fff;margin:10px;padding:10px;border-radius:6px}
+.so_box{margin-bottom:12px}
+.txts{width:100%;padding:8px 6px;font-size:16px;border:1px solid #ccc;border-radius:4px;box-sizing:border-box}
+.buts{width:100%;padding:10px 0;font-size:16px;background:#0066cc;color:#fff;border:none;border-radius:4px;cursor:pointer}
+.so_boxex{margin-top:12px;font-size:14px;color:#666;text-align:center}
+.equation{margin:12px 0;text-align:center;font-size:16px;color:#333}
+</style>
+</head>
+<body>
+<div class="sub_top">
+  <div class="back"><a href="javascript:history.back()">返回</a></div>
+  <div class="title">一高2023级高三分班查询系统(仅供娱乐)</div>
+</div>
+
+<div class="main">
+  <form id="queryForm">
+    <div class="so_box">
+      <input id="name" class="txts" type="text" placeholder="请输入姓名" maxlength="20" required>
+    </div>
+
+    <div class="equation">
+      <span id="eq"></span><br>
+      <input id="ans" class="txts" type="text" placeholder="请输入方程的解，两解用中文逗号隔开，例如1，-2" required>
+    </div>
+
+    <button type="submit" class="buts">立即查询</button>
+  </form>
+
+  <div class="so_boxex" style="margin-top:20px;">
+    免责声明：本系统仅供娱乐，查询结果与实际分班无关，请勿当真！
+  </div>
+</div>
+
+<script>
+(() => {
+  'use strict';
+  const eqSpan = document.getElementById('eq');
+  const form   = document.getElementById('queryForm');
+  let answers;
+
+  const gen = () => {
+    const [x1, x2] = [0, 0].map(() => Math.floor(Math.random() * 11) - 5);
+    const [a, b, c] = [1, -(x1 + x2), x1 * x2];
+    answers = [x1, x2].sort((a, b) => a - b);
+    eqSpan.textContent = `请解方程：${a}x² ${b >= 0 ? '+' : ''}${b}x ${c >= 0 ? '+' : ''}${c} = 0`;
+  };
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const user = document.getElementById('ans').value.trim()
+                   .split('，').map(v => Number(v.trim())).sort((a, b) => a - b);
+
+    if (answers.length !== user.length || !answers.every((v, i) => v === user[i])) {
+      alert('方程解错了哦，再想想～');
+      return;
+    }
+
+    // 打开新窗口并写入结果
+    const w = window.open('', '_blank');
+    w.document.write(`
+      <!DOCTYPE html>
+      <html lang="zh-CN">
+      <head>
+        <meta charset="utf-8">
+        <title>分班结果(仅供娱乐)</title>
+        <style>
+          body{margin:0;font-family:"Microsoft YaHei",sans-serif;background:#f2f2f2;display:flex;justify-content:center;align-items:center;height:100vh}
+          .box{background:#fff;padding:30px 50px;border-radius:8px;text-align:center;font-size:20px}
+        </style>
+      </head>
+      <body>
+        <div class="box">${name}，你将被分到${name}所在的班级🤣🤣🤣</div>
+      </body>
+      </html>
+    `);
+    w.document.close();
+  });
+
+  gen();
+})();
+</script>
+</body>
+</html>
