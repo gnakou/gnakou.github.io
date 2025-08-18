@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0">
-<title>一高2023级高三分班查询系统(仅供娱乐)</title>
+<title>永城一高2023级高三分班查询系统</title>
 <style>
 body{margin:0;font-family:"Microsoft YaHei",sans-serif;background:#f2f2f2}
 .sub_top{height:44px;line-height:44px;background:#0066cc;color:#fff;display:flex;padding:0 10px}
@@ -20,7 +20,7 @@ body{margin:0;font-family:"Microsoft YaHei",sans-serif;background:#f2f2f2}
 <body>
 <div class="sub_top">
   <div class="back"><a href="javascript:history.back()">返回</a></div>
-  <div class="title">一高2023级高三分班查询系统(仅供娱乐)</div>
+  <div class="title">永城一高2023级高三分班查询系统</div>
 </div>
 
 <div class="main">
@@ -31,7 +31,7 @@ body{margin:0;font-family:"Microsoft YaHei",sans-serif;background:#f2f2f2}
 
     <div class="equation">
       <span id="eq"></span><br>
-      <input id="ans" class="txts" type="text" placeholder="请输入方程的解，两解用中文逗号隔开，例如1，-2" required>
+      <input id="ans" class="txts" type="text" placeholder="请输入方程的解，两解用中文逗号隔开，例如1，2" required>
     </div>
 
     <button type="submit" class="buts">立即查询</button>
@@ -67,7 +67,6 @@ body{margin:0;font-family:"Microsoft YaHei",sans-serif;background:#f2f2f2}
       return;
     }
 
-    // 打开新窗口并写入结果
     const w = window.open('', '_blank');
     w.document.write(`
       <!DOCTYPE html>
