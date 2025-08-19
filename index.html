@@ -1,84 +1,715 @@
-<!doctype html>
-<html lang="zh-CN">
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
 <head>
-<meta charset="utf-8">
-<title>永城一高2023级高三分班查询系统</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft YaHei",sans-serif}
-body{background:#f2f2f2}
-.sub_top{height:44px;line-height:44px;background:#0066cc;color:#fff;display:flex;padding:0 10px;font-size:18px;font-weight:bold}
-.back a{color:#fff;text-decoration:none}
-.main{background:#fff;margin:10px;padding:10px;border-radius:6px}
-.txts,.buts{width:100%;font-size:16px;border-radius:4px;margin-bottom:12px}
-.txts{padding:8px 6px;border:1px solid #ccc}
-.buts{padding:10px 0;color:#fff;border:none;cursor:pointer;background:#0066cc}
-.startBtn{background:#28a745}
-.so_boxex,.equation{font-size:14px;color:#666;text-align:center;margin-top:20px}
-.equation{margin:12px 0;color:#333}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gnakou's Blog</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        :root {
+            /* 浅色主题 */
+            --md-sys-color-primary-light: #0061A4;
+            --md-sys-color-on-primary-light: #FFFFFF;
+            --md-sys-color-primary-container-light: #D1E4FF;
+            --md-sys-color-on-primary-container-light: #001D36;
+            --md-sys-color-secondary-light: #0061A4;
+            --md-sys-color-on-secondary-light: #FFFFFF;
+            --md-sys-color-secondary-container-light: #D1E4FF;
+            --md-sys-color-on-secondary-container-light: #001D36;
+            --md-sys-color-surface-light: #F8F9FF;
+            --md-sys-color-surface-variant-light: #E0E2EC;
+            --md-sys-color-on-surface-light: #1A1C1E;
+            --md-sys-color-on-surface-variant-light: #43474E;
+            --md-sys-color-outline-light: #74777F;
+            
+            /* 深色主题 */
+            --md-sys-color-primary-dark: #9ECAFF;
+            --md-sys-color-on-primary-dark: #003258;
+            --md-sys-color-primary-container-dark: #00497D;
+            --md-sys-color-on-primary-container-dark: #D1E4FF;
+            --md-sys-color-secondary-dark: #9ECAFF;
+            --md-sys-color-on-secondary-dark: #003258;
+            --md-sys-color-secondary-container-dark: #00497D;
+            --md-sys-color-on-secondary-container-dark: #D1E4FF;
+            --md-sys-color-surface-dark: #111318;
+            --md-sys-color-surface-variant-dark: #43474E;
+            --md-sys-color-on-surface-dark: #E2E2E6;
+            --md-sys-color-on-surface-variant-dark: #C4C6CF;
+            --md-sys-color-outline-dark: #8E9099;
+            
+            /* 通用变量 */
+            --md-sys-color-primary: var(--md-sys-color-primary-dark);
+            --md-sys-color-on-primary: var(--md-sys-color-on-primary-dark);
+            --md-sys-color-primary-container: var(--md-sys-color-primary-container-dark);
+            --md-sys-color-on-primary-container: var(--md-sys-color-on-primary-container-dark);
+            --md-sys-color-secondary: var(--md-sys-color-secondary-dark);
+            --md-sys-color-on-secondary: var(--md-sys-color-on-secondary-dark);
+            --md-sys-color-secondary-container: var(--md-sys-color-secondary-container-dark);
+            --md-sys-color-on-secondary-container: var(--md-sys-color-on-secondary-container-dark);
+            --md-sys-color-surface: var(--md-sys-color-surface-dark);
+            --md-sys-color-surface-variant: var(--md-sys-color-surface-variant-dark);
+            --md-sys-color-on-surface: var(--md-sys-color-on-surface-dark);
+            --md-sys-color-on-surface-variant: var(--md-sys-color-on-surface-variant-dark);
+            --md-sys-color-outline: var(--md-sys-color-outline-dark);
+            
+            --md-sys-elevation-1: 0px 1px 3px 1px rgba(0, 0, 0, 0.15), 0px 1px 2px rgba(0, 0, 0, 0.3);
+            --md-sys-elevation-2: 0px 2px 6px 2px rgba(0, 0, 0, 0.15), 0px 1px 2px rgba(0, 0, 0, 0.3);
+            --md-sys-elevation-3: 0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px rgba(0, 0, 0, 0.3);
+            
+            --md-sys-shape-corner-extra-small: 4px;
+            --md-sys-shape-corner-small: 8px;
+            --md-sys-shape-corner-medium: 12px;
+            --md-sys-shape-corner-large: 16px;
+            --md-sys-shape-corner-extra-large: 28px;
+            --md-sys-shape-corner-full: 999px;
+            
+            --md-sys-state-hover: 0.08;
+            --md-sys-state-focus: 0.12;
+            --md-sys-state-pressed: 0.12;
+            --md-sys-state-dragged: 0.16;
+        }
+
+        [data-theme="light"] {
+            --md-sys-color-primary: var(--md-sys-color-primary-light);
+            --md-sys-color-on-primary: var(--md-sys-color-on-primary-light);
+            --md-sys-color-primary-container: var(--md-sys-color-primary-container-light);
+            --md-sys-color-on-primary-container: var(--md-sys-color-on-primary-container-light);
+            --md-sys-color-secondary: var(--md-sys-color-secondary-light);
+            --md-sys-color-on-secondary: var(--md-sys-color-on-secondary-light);
+            --md-sys-color-secondary-container: var(--md-sys-color-secondary-container-light);
+            --md-sys-color-on-secondary-container: var(--md-sys-color-on-secondary-container-light);
+            --md-sys-color-surface: var(--md-sys-color-surface-light);
+            --md-sys-color-surface-variant: var(--md-sys-color-surface-variant-light);
+            --md-sys-color-on-surface: var(--md-sys-color-on-surface-light);
+            --md-sys-color-on-surface-variant: var(--md-sys-color-on-surface-variant-light);
+            --md-sys-color-outline: var(--md-sys-color-outline-light);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: 'Roboto', 'Segoe UI', sans-serif;
+            background-color: var(--md-sys-color-surface);
+            color: var(--md-sys-color-on-surface);
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* 顶栏样式 */
+        .app-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background-color: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+            box-shadow: var(--md-sys-elevation-1);
+        }
+
+        .app-bar .title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .app-bar .actions {
+            display: flex;
+            gap: 16px;
+        }
+
+        /* 侧边导航 */
+        .nav-drawer {
+            position: fixed;
+            top: 64px;
+            left: 0;
+            bottom: 0;
+            width: 280px;
+            background-color: var(--md-sys-color-surface);
+            border-right: 1px solid var(--md-sys-color-outline);
+            padding: 16px 0;
+            overflow-y: auto;
+            z-index: 900;
+            transform: translateX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-drawer.hidden {
+            transform: translateX(-100%);
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 24px;
+            color: var(--md-sys-color-on-surface-variant);
+            text-decoration: none;
+            border-radius: var(--md-sys-shape-corner-full);
+            margin: 0 8px;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            background-color: var(--md-sys-color-secondary-container);
+            color: var(--md-sys-color-on-secondary-container);
+        }
+
+        .nav-item:hover {
+            background-color: rgba(var(--md-sys-color-on-surface), var(--md-sys-state-hover));
+        }
+
+        .nav-item .material-symbols-outlined {
+            margin-right: 16px;
+            font-size: 24px;
+        }
+
+        /* 主内容区 */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            margin-top: 64px;
+            padding: 24px;
+            max-width: 900px;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        /* 文章卡片 */
+        .articles-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 16px;
+        }
+
+        .article-card {
+            background-color: var(--md-sys-color-surface-variant);
+            border-radius: var(--md-sys-shape-corner-medium);
+            overflow: hidden;
+            box-shadow: var(--md-sys-elevation-1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .article-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--md-sys-elevation-3);
+        }
+
+        .article-image {
+            height: 160px;
+            background-size: cover;
+            background-position: center;
+            background-color: var(--md-sys-color-primary-container);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .article-content {
+            padding: 16px;
+        }
+
+        .article-title {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--md-sys-color-on-surface);
+        }
+
+        .article-date {
+            font-size: 0.875rem;
+            color: var(--md-sys-color-on-surface-variant);
+            margin-bottom: 12px;
+        }
+
+        .article-excerpt {
+            font-size: 0.9375rem;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
+        /* 文章详情页 */
+        .article-detail {
+            background-color: var(--md-sys-color-surface-variant);
+            border-radius: var(--md-sys-shape-corner-medium);
+            padding: 32px;
+            margin-top: 24px;
+        }
+
+        .article-detail-title {
+            font-size: 2rem;
+            margin-bottom: 16px;
+            color: var(--md-sys-color-on-surface);
+        }
+
+        .article-detail-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
+        .article-detail-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .article-detail-content p {
+            margin-bottom: 1.5em;
+        }
+
+        .article-detail-content img {
+            max-width: 100%;
+            border-radius: var(--md-sys-shape-corner-small);
+            margin: 24px 0;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 24px;
+            padding: 8px 16px;
+            background-color: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+            border-radius: var(--md-sys-shape-corner-full);
+            cursor: pointer;
+        }
+
+        /* 关于页面 */
+        .about-section {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .profile-card {
+            display: flex;
+            gap: 24px;
+            background-color: var(--md-sys-color-surface-variant);
+            border-radius: var(--md-sys-shape-corner-medium);
+            padding: 24px;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: var(--md-sys-color-primary-container);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--md-sys-color-on-primary-container);
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .profile-title {
+            color: var(--md-sys-color-on-surface-variant);
+            margin-bottom: 16px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+            text-decoration: none;
+        }
+
+        /* 加载状态 */
+        .loading-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--md-sys-color-outline);
+            border-top: 5px solid var(--md-sys-color-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* 响应式设计 */
+        .menu-button {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--md-sys-color-on-primary);
+            cursor: pointer;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--md-sys-color-on-primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .theme-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 900px) {
+            .nav-drawer {
+                transform: translateX(-100%);
+            }
+            
+            .nav-drawer.visible {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .menu-button {
+                display: block;
+            }
+            
+            .articles-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .app-bar .title {
+                font-size: 1.2rem;
+            }
+            
+            .profile-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        /* 工具类 */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
 </head>
 <body>
-<div class="sub_top">
-  <a class="back" href="javascript:history.back()">返回</a>
-  <div style="flex:1;text-align:center">永城一高2023级高三分班查询系统</div>
-</div>
+    <!-- 顶栏 -->
+    <div class="app-bar">
+        <button class="menu-button">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+        <div class="title">
+            <span class="material-symbols-outlined">draft</span>
+            <span>Gnakou's Blog</span>
+        </div>
+        <div class="actions">
+            <button class="theme-toggle">
+                <span class="material-symbols-outlined">light_mode</span>
+            </button>
+        </div>
+    </div>
 
-<div class="main">
-  <input id="name" class="txts" placeholder="请输入姓名" maxlength="20">
-  <button id="startBtn" class="buts startBtn">开始解方程</button>
-  <div id="eq" class="equation"></div>
-  <input id="ans" class="txts" placeholder="两解用中文逗号隔开，例如1，2">
-  <button id="queryBtn" class="buts">立即查询</button>
-  <div class="so_boxex">免责声明：仅供娱乐，与实际分班无关</div>
-</div>
+    <!-- 侧边导航 -->
+    <div class="nav-drawer">
+        <div class="nav-item active" data-target="home">
+            <span class="material-symbols-outlined">home</span>
+            <span>简介</span>
+        </div>
+        <div class="nav-item" data-target="articles">
+            <span class="material-symbols-outlined">article</span>
+            <span>文章</span>
+        </div>
+        <div class="nav-item" data-target="about">
+            <span class="material-symbols-outlined">person</span>
+            <span>关于</span>
+        </div>
+    </div>
 
-<script>
-const $ = id => document.getElementById(id);
-let ans, start;
+    <!-- 主内容区 -->
+    <div class="main-content">
+        <!-- 首页/简介 -->
+        <div class="content-section active" id="home">
+            <h1>欢迎来到Gnakou的博客</h1>
+            <p>这是一个基于 Material Design 3 (Material You) 设计的响应式博客系统。</p>
+            <p>点击左侧导航栏的"文章"查看最新发布的文章，或点击"关于"了解更多关于本博客的信息。</p>
+        </div>
 
-const gen = () => {
-  const x1 = Math.floor(Math.random() * 11) - 5,
-        x2 = Math.floor(Math.random() * 11) - 5;
-  ans = [x1, x2].sort((a, b) => a - b);
-  const b = -(x1 + x2), c = x1 * x2;
-  $('eq').textContent = `请解方程：x²${b?`${b<0?'':'+'}${b}x`:''}${c?`${c<0?'':'+'}${c}`:''}=0`;
-};
+        <!-- 文章列表 -->
+        <div class="content-section" id="articles">
+            <h1>所有文章</h1>
+            <div class="articles-container" id="articles-list">
+                <div class="loading-container">
+                    <div class="loading-spinner"></div>
+                </div>
+            </div>
+        </div>
 
-$('startBtn').onclick = () => {
-  gen();
-  start = Date.now();
-  $('startBtn').disabled = true;
-  $('startBtn').textContent = '计时中…';
-};
+        <!-- 文章详情 -->
+        <div class="content-section" id="article-detail">
+            <div class="back-button">
+                <span class="material-symbols-outlined">arrow_back</span>
+                <span>返回文章列表</span>
+            </div>
+            <div class="article-detail" id="article-content">
+                <div class="loading-container">
+                    <div class="loading-spinner"></div>
+                </div>
+            </div>
+        </div>
 
-$('queryBtn').onclick = () => {
-  if (!start) return alert('请先点击“开始解方程”');
-  const name = $('name').value.trim();
-  if (!name) return alert('请输入姓名');
-  const u = $('ans').value.trim().split('，').map(Number).sort((a,b)=>a-b);
-  if (u.length !== 2 || u.some(isNaN)) return alert('格式错误');
-  if (ans.join() !== u.join()) return alert('方程解错了哦～');
-  const t = (Date.now() - start) / 1e3,
-        pool = (t <= 30 ? [5,6,7,8,9,10,11,12,28,29,30,31,32,33,34,35]
-                        : [13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50]),
-        cls = pool[Math.floor(Math.random() * pool.length)],
-        type = t <= 30 ? '加强班' : '普通班';
-  document.body.innerHTML = `
-    <style>
-      body{display:flex;justify-content:center;align-items:center;height:100vh;background:#f2f2f2}
-      .box{background:#fff;padding:30px 50px;border-radius:8px;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.1)}
-      .name{font-size:24px;font-weight:bold;color:#0066cc;margin-bottom:15px}
-      .info{font-size:20px;margin-bottom:10px}
-      .note{font-size:14px;color:#999;margin-top:20px}
-    </style>
-    <div class="box">
-      <div class="name">${name}</div>
-      <div class="info">恭喜你被分入 ${cls} 班（${type}）</div>
-      <div class="info">解题用时: ${t.toFixed(2)} 秒</div>
-      <div class="note">注：此结果仅供娱乐，与实际分班无关</div>
-    </div>`;
-};
-</script>
+        <!-- 关于页面 -->
+        <div class="content-section" id="about">
+            <h1>关于我们</h1>
+            <div class="about-section">
+                <div class="profile-card">
+                    <div class="profile-image">
+                        <span class="material-symbols-outlined">person</span>
+                    </div>
+                    <div class="profile-info">
+                        <h2 class="profile-name">Gnakou</h2>
+                        <p class="profile-title">学生</p>
+                        <p>无所事事</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link">
+                                <span class="material-symbols-outlined">mail</span>
+                            </a>
+                            <a href="#" class="social-link">
+                                <span class="material-symbols-outlined">public</span>
+                            </a>
+                            <a href="#" class="social-link">
+                                <span class="material-symbols-outlined">share</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h2>博客介绍</h2>
+                    <p>本博客采用 Material Design 3 (Material You) 设计语言，具有深蓝主题和响应式布局，适配各种设备尺寸。</p>
+                    <p>所有文章存储在 article/ 目录下，添加新的HTML文件即可自动发布新文章。</p>
+                    <p>文章信息通过 articles.json 文件管理，只需更新该文件即可添加新文章。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM加载完成后执行
+        document.addEventListener('DOMContentLoaded', () => {
+            // 导航切换
+            const navItems = document.querySelectorAll('.nav-item');
+            const contentSections = document.querySelectorAll('.content-section');
+            
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    // 移除所有活动状态
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    contentSections.forEach(section => section.classList.remove('active'));
+                    
+                    // 添加当前活动状态
+                    item.classList.add('active');
+                    const target = item.dataset.target;
+                    
+                    if (target === 'articles') {
+                        loadArticles();
+                    }
+                    
+                    document.getElementById(target).classList.add('active');
+                    
+                    // 移动端点击后关闭抽屉
+                    if (window.innerWidth < 900) {
+                        document.querySelector('.nav-drawer').classList.remove('visible');
+                    }
+                });
+            });
+            
+            // 主题切换
+            const themeToggle = document.querySelector('.theme-toggle');
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                
+                // 更新图标
+                const icon = themeToggle.querySelector('.material-symbols-outlined');
+                icon.textContent = newTheme === 'dark' ? 'light_mode' : 'dark_mode';
+            });
+            
+            // 移动端菜单按钮
+            const menuButton = document.querySelector('.menu-button');
+            menuButton.addEventListener('click', () => {
+                document.querySelector('.nav-drawer').classList.toggle('visible');
+            });
+            
+            // 返回按钮
+            const backButton = document.querySelector('.back-button');
+            backButton.addEventListener('click', () => {
+                contentSections.forEach(section => section.classList.remove('active'));
+                document.getElementById('articles').classList.add('active');
+                navItems.forEach(nav => {
+                    if (nav.dataset.target === 'articles') {
+                        nav.classList.add('active');
+                    } else {
+                        nav.classList.remove('active');
+                    }
+                });
+            });
+        });
+        
+        // 加载文章列表
+        async function loadArticles() {
+            const container = document.getElementById('articles-list');
+            container.innerHTML = '<div class="loading-container"><div class="loading-spinner"></div></div>';
+            
+            try {
+                // 从服务器加载articles.json
+                const response = await fetch('article/articles.json');
+                if (!response.ok) {
+                    throw new Error('加载文章列表失败');
+                }
+                
+                const data = await response.json();
+                
+                if (data.articles && data.articles.length > 0) {
+                    renderArticles(data.articles);
+                } else {
+                    container.innerHTML = '<div class="no-articles">暂无文章</div>';
+                }
+            } catch (error) {
+                console.error('加载文章列表失败:', error);
+                container.innerHTML = '<div class="error-message">加载文章列表失败，请稍后再试</div>';
+            }
+        }
+        
+        // 渲染文章列表
+        function renderArticles(articles) {
+            const container = document.getElementById('articles-list');
+            container.innerHTML = '';
+            
+            articles.forEach(article => {
+                const articleEl = document.createElement('div');
+                articleEl.className = 'article-card';
+                articleEl.innerHTML = `
+                    <div class="article-image" style="background: ${article.image || 'var(--md-sys-color-primary-container)'}">
+                        <span class="material-symbols-outlined">article</span>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">${article.title}</h3>
+                        <div class="article-date">${formatDate(article.date)}</div>
+                        <p class="article-excerpt">${article.excerpt}</p>
+                    </div>
+                `;
+                
+                articleEl.addEventListener('click', () => {
+                    // 显示文章详情
+                    document.querySelectorAll('.content-section').forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    
+                    document.getElementById('article-detail').classList.add('active');
+                    
+                    // 加载文章内容
+                    loadArticleContent(article);
+                });
+                
+                container.appendChild(articleEl);
+            });
+        }
+        
+        // 加载文章内容
+        async function loadArticleContent(article) {
+            const container = document.getElementById('article-content');
+            container.innerHTML = '<div class="loading-container"><div class="loading-spinner"></div></div>';
+            
+            try {
+                // 从服务器加载文章内容
+                const response = await fetch(`article/${article.link}`);
+                if (!response.ok) {
+                    throw new Error('加载文章内容失败');
+                }
+                
+                const content = await response.text();
+                
+                container.innerHTML = `
+                    <h1 class="article-detail-title">${article.title}</h1>
+                    <div class="article-detail-meta">
+                        <span>${formatDate(article.date)}</span>
+                        <span>•</span>
+                        <span>${article.tags ? article.tags.map(tag => `#${tag}`).join(' ') : ''}</span>
+                    </div>
+                    <div class="article-detail-content">
+                        ${content}
+                    </div>
+                `;
+            } catch (error) {
+                console.error('加载文章内容失败:', error);
+                container.innerHTML = '<div class="error-message">加载文章内容失败，请稍后再试</div>';
+            }
+        }
+        
+        // 格式化日期
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('zh-CN', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+    </script>
 </body>
 </html>
