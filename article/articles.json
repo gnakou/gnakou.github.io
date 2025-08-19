@@ -1,0 +1,30 @@
+{
+  "articles": [
+    {
+      "id": "article1",
+      "title": "Material Design 3 设计指南",
+      "date": "2023-10-15",
+      "excerpt": "探索Material Design 3的最新特性和最佳实践，了解如何创建美观且实用的界面。",
+      "tags": ["设计", "UI/UX"],
+      "image": "linear-gradient(135deg, #0061A4, #00497D)",
+      "link": "article1.html"
+    },
+    {
+      "id": "article2",
+      "title": "测试测试",
+      "date": "2023-09-22",
+      "excerpt": "测试",
+      "tags": ["测试", "测试"],
+      "image": "linear-gradient(135deg, #00897B, #00695C)",
+      "link": "article2.html"
+    },
+    {
+      "id": "article3",
+      "title": "测试测试",
+      "date": "2023-08-30",
+      "excerpt": "测试",
+      "tags": ["测试", "测试"],
+      "link": "article3.html"
+    }
+  ]
+}
