@@ -2,10 +2,10 @@
   "articles": [
     {
       "id": "article1",
-      "title": "Material Design 3 设计指南",
-      "date": "2023-10-15",
-      "excerpt": "探索Material Design 3的最新特性和最佳实践，了解如何创建美观且实用的界面。",
-      "tags": ["设计", "UI/UX"],
+      "title": "分班小游戏",
+      "date": "2025-8-18",
+      "excerpt": "通过解方程判断实力",
+      "tags": ["娱乐", "测试"],
       "image": "linear-gradient(135deg, #0061A4, #00497D)",
       "link": "article1.html"
     },
